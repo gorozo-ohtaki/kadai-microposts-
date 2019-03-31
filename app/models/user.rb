@@ -39,4 +39,17 @@ class User < ApplicationRecord
     Micropost.where(user_id: self.following_ids + [self.id])
   end
   
+  def followpost(post)
+    self.favorites.find_or_create_by(micropost_id: post.id)
+  end
+
+  def unfollowpost(post)
+    favorite = self.favorites.find_by(micropost_id: post.id)
+    favorite.destroy if favorite
+  end
+
+  def followingpost?(post)
+    self.followingposts.include?(post)
+  end
+  
 end
