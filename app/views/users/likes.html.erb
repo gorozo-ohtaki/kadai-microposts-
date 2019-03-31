@@ -1,5 +1,6 @@
+<h1>My Favorite Microposts</h1>
 <ul class="media-list">
-  <% microposts.each do |micropost| %>
+  <% @microposts.each do |micropost| %>
     <li class="media">
       <div class="media-left">
         <img class="media-object img-rounded" src="<%= gravatar_url(micropost.user, options = { size: 50 }) %>" alt="">
@@ -27,7 +28,7 @@
             <% else %>
             <%= form_for(current_user.favorites.build) do |f| %>
             <%= hidden_field_tag :micropost_id, micropost.id %>
-            <%= f.submit 'Like!', class: 'btn btn-primary btn-sm' %>
+            <%= f.submit 'Like', class: 'btn btn-primary btn-sm' %>
             <% end %>
             <% end %>
             
@@ -37,5 +38,5 @@
       </div>
     </li>
   <% end %>
-  <%= paginate microposts %>
+  <%= paginate @microposts %>
 </ul>
